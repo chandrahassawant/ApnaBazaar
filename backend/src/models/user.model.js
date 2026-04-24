@@ -7,11 +7,12 @@ const { poolPromise, sql } = require("../config/db")
        .input("firstName",sql.VarChar,user.firstName)
        .input("lastName",sql.VarChar,user.lastName)
        .input("email",sql.VarChar,user.email)
+       .input("phone",sql.VarChar,user.phone)
        .input("password",sql.VarChar,user.password)
        .query(`
-    INSERT INTO Users (firstName, lastName, email, password)
+    INSERT INTO Users (firstName, lastName, email, phone, password)
     OUTPUT INSERTED.id
-    VALUES (@firstName, @lastName, @email, @password)
+    VALUES (@firstName, @lastName, @email, @phone, @password)
   `);
 
   return result;
