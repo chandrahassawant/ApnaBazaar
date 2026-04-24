@@ -12,13 +12,19 @@ const dbConfig = {
   },
 };
 
-const connectDB = async () => {
-  try {
-    await sql.connect(dbConfig);
+// ✅ Create shared connection
+const poolPromise = new sql.ConnectionPool(dbConfig)
+  .connect()
+  .then((pool) => {
     console.log("✅ MSSQL Connected Successfully!");
-  } catch (error) {
-    console.error("❌ MSSQL Connection Failed:", error.message);
-  }
-};
+    return pool;
+  })
+  .catch((err) => {
+    console.error("❌ MSSQL Connection Failed:", err.message);
+    throw err;
+  });
 
-module.exports = { sql, connectDB };
+module.exports = {
+  sql,
+  poolPromise,
+};

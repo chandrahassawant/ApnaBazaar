@@ -1,0 +1,16 @@
+use ApnaBazaar_db;
+
+
+CREATE TABLE Users (
+  id INT IDENTITY(1,1) PRIMARY KEY,
+  firstName VARCHAR(20) NOT NULL,
+  lastName VARCHAR(50) NOT NULL,
+  email VARCHAR(150) NOT NULL UNIQUE,
+  phone VARCHAR(20) NULL,
+  password VARCHAR(255) NOT NULL,
+  role VARCHAR(20) NOT NULL DEFAULT 'customer',
+  isActive BIT NOT NULL DEFAULT 1,
+  isEmailVerified BIT NOT NULL DEFAULT 0,
+  createdAt DATETIME NOT NULL DEFAULT GETDATE(),
+  updatedAt DATETIME NULL
+);

@@ -6,12 +6,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// test route
-app.get("/api/test", (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Backend API is working fine ✅",
-  });
-});
+
+const userRoutes =require("../src/routes/user.routes")
+
+app.use("/api", userRoutes);
 
 module.exports = app;
